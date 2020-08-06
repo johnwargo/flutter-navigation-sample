@@ -33,23 +33,12 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings'), actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.save),
-          onPressed: () {
-            print('Settings: Save button tapped');
-            // Save the data to preferences
-            config.deviceAddress = _deviceAddress;
-          },
-        ),
-      ]),
+      appBar: AppBar(title: Text('Settings')),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            SizedBox(height: 10),
-            Text(
-                "This app communicates with the Remote Notify device using its network (IP) address. Please enter the IP address for the device:"),
+            Text("The IP Address:"),
             SizedBox(height: 10),
             TextField(
               controller: deviceAddressController,
@@ -64,5 +53,4 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-
 }
