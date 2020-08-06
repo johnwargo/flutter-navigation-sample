@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './settings.dart';
 import '../classes/config.dart';
 
 final Config config = new Config();
@@ -43,6 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _openPage() {
     print('Home: _openPage()');
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => SettingsPage(),
+            settings: RouteSettings(name: '/settings')
+        ));
   }
 
   @override
@@ -110,65 +117,4 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         });
   }
-
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(title: Text(widget.appName), actions: <Widget>[
-//        IconButton(
-//          icon: Icon(Icons.refresh),
-//          onPressed: () {
-//            print('Home: Refresh button tapped');
-//            _deviceAddress = config.deviceAddress;
-//            deviceAddressController.text = _deviceAddress;
-//            setState(() {});
-//          },
-//        ),
-//        IconButton(
-//          icon: Icon(Icons.save),
-//          onPressed: () {
-//            print('Home: Save button tapped');
-//            // Save the data to preferences
-//            config.deviceAddress = _deviceAddress;
-//          },
-//        ),
-//      ]),
-//      body: SafeArea(
-//        child: ListView(
-//          padding: const EdgeInsets.all(16.0),
-//          children: <Widget>[
-//            SizedBox(height: 10),
-//            Text(
-//                "This app communicates with the Remote Notify device using its network (IP) address. Please enter the IP address for the device:"),
-//            SizedBox(height: 10),
-//            TextField(
-//              controller: deviceAddressController,
-//              onChanged: updateDeviceAddress,
-//              decoration: InputDecoration(
-//                  border: OutlineInputBorder(),
-//                  hintText: '(Device IP Address)'),
-//              style: TextStyle(fontFamily: 'Roboto Mono'),
-//            ),
-//            SizedBox(height: 10),
-//            RaisedButton(
-//              color: Colors.blue,
-//              textColor: Colors.white,
-//              disabledColor: Colors.grey,
-//              disabledTextColor: Colors.black,
-//              padding: EdgeInsets.all(16.0),
-//              shape: RoundedRectangleBorder(
-//                borderRadius: BorderRadius.circular(5),
-//              ),
-//              splashColor: Colors.blueAccent,
-//              onPressed: _openPage,
-//              child: Text(
-//                "Go To Sub-page",
-//                style: TextStyle(fontSize: 20.0),
-//              ),
-//            ),
-//          ],
-//        ),
-//      ),
-//    );
-//  }
 }

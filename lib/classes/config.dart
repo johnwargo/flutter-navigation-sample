@@ -14,7 +14,7 @@ class Config {
 
   Config._internal() {
     print('Config constructor');
-    loadData();
+//    loadData();
   }
 
   Future loadData() async {
@@ -47,10 +47,4 @@ class Config {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
-
-//  _saveBool(key, value) async {
-//    print('Config: _saveBool($key, $value)');
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    prefs.setBool(key, value);
-//  }
 }
