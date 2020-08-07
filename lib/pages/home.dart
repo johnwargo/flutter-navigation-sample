@@ -42,14 +42,42 @@ class _MyHomePageState extends State<MyHomePage> {
     _deviceAddress = value;
   }
 
-  void _openPage() {
+  void _openPage() async {
     print('Home: _openPage()');
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => SettingsPage(),
-            settings: RouteSettings(name: '/settings')
-        ));
+    config.deviceAddress = _deviceAddress;
+
+    //======================================
+    // Opens a page with a back button
+    //======================================
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //      builder: (BuildContext context) => SettingsPage(),
+    //      settings: RouteSettings(name: '/settings')
+    //   ));
+
+    //======================================
+    // opens a page with an X to close
+    // https://fidev.io/full-screen-dialog/
+    //======================================
+    // Navigator.of(context).push(new MaterialPageRoute<Null>(
+    //    builder: (BuildContext context) {
+    //      return new SettingsPage();
+    //    },
+    //    fullscreenDialog: true
+    // ));
+
+    String ipAddr = await Navigator.of(context).push(new MaterialPageRoute<String>(
+        builder: (BuildContext context) {
+          return new SettingsPage();
+        },
+        fullscreenDialog: true
+    ));
+    if (ipAddr != null ) {
+      setState(() {
+        _deviceAddress = ipAddr;
+      });
+    }
   }
 
   @override
@@ -83,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     SizedBox(height: 10),
                     Text(
-                        "This app communicates with the Remote Notify device using its network (IP) address. Please enter the IP address for the device:"),
+                        "Enter a value in the field below, then click the button (below) to continue."),
                     SizedBox(height: 10),
                     TextField(
                       controller: deviceAddressController,

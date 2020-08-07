@@ -21,6 +21,8 @@ class _SettingsPageState extends State<SettingsPage> {
     print('Settings: initState()');
     super.initState();
 
+    // increment the current value
+    _deviceAddress += '.23';
     // Set the initial value for the edit field
     deviceAddressController = TextEditingController(text: _deviceAddress);
   }
@@ -33,19 +35,32 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text('Settings'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.save),
+              onPressed: () {
+                print('Home: Save button tapped');
+                // Save the data to preferences
+                config.deviceAddress = _deviceAddress;
+                Navigator.of(context).pop(_deviceAddress);
+              },
+            ),
+          ]),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            Text("The IP Address:"),
+            Text("Updated value, returned to the previous page."),
             SizedBox(height: 10),
             TextField(
               controller: deviceAddressController,
               onChanged: updateDeviceAddress,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: '(Device IP Address)'),
+                border: OutlineInputBorder(),
+              ),
               style: TextStyle(fontFamily: 'Roboto Mono'),
             ),
           ],
