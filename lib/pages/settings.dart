@@ -36,6 +36,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // The following line hides/removes the automatically created
+        // back/close button in the toolbar
           automaticallyImplyLeading: false,
           title: Text('Settings'),
           actions: <Widget>[
